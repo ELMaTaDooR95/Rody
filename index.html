@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Randa 💙</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body{
+    margin:0;
+    font-family: 'Cairo', Arial, sans-serif;
+    color:white;
+    overflow-x:hidden;
+    background:black;
+}
+
+/* شاشة تحميل */
+#loading{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:200;
+    flex-direction:column;
+    color:#3aa0ff;
+    font-size:24px;
+}
+@keyframes spin{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}
+.spinner{
+    width:60px;
+    height:60px;
+    border:6px solid #3aa0ff;
+    border-top:6px solid #fff;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin-bottom:20px;
+}
+
+/* شاشة الباسورد */
+#lockScreen{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://od.lk/s/MzlfMTAxMDExMDUzXw/Snapchat-1113835888.jpg') center/cover no-repeat;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:100;
+    transition:1s;
+    text-align:center;
+    opacity:0;
+}
+
+/* المحتوى الرئيسي */
+#main{
+    display:none;
+    padding:20px;
+    min-height:100vh;
+    text-align:center;
+    animation:fadeIn 2s;
+    background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+    overflow:hidden;
+    position:relative;
+}
+
+/* نص الرسالة */
+#typing{
+    line-height:1.8;
+    font-size:18px;
+    margin-bottom:20px;
+    text-shadow:0 0 5px #3aa0ff;
+}
+
+/* السلايدر */
+.slider{
+    width:90%;
+    max-width:500px;
+    margin:20px auto;
+    position:relative;
+}
+.slider img, .slider video{
+    width:100%;
+    border-radius:20px;
+    display:none;
+    box-shadow:0 0 20px rgba(0,150,255,0.4);
+}
+.slider img.active, .slider video.active{
+    display:block;
+}
+
+/* عداد الأيام */
+#counter{
+    font-size:20px;
+    margin:15px 0;
+}
+
+/* انفجار Ultimate */
+.explosion{
+    position:fixed;
+    pointer-events:none;
+    font-size:20px;
+    animation:explode linear forwards;
+}
+@keyframes explode{
+    0%{transform:translate(0,0) scale(1); opacity:1;}
+    100%{transform:translate(var(--x), var(--y)) scale(1.5); opacity:0;}
+}
+
+/* الفورم */
+textarea, input, button{
+    font-family: 'Cairo', Arial, sans-serif;
+    padding:12px;
+    margin-top:10px;
+    border-radius:10px;
+    border:none;
+}
+textarea{
+    width:90%;
+    max-width:600px;
+    font-size:16px;
+    height:180px; /* كبرنا المربع شويه */
+    resize:none;
+}
+button{
+    background:#3aa0ff;
+    color:white;
+    cursor:pointer;
+}
+
+/* فقاعات */
+.bubble{
+    position:absolute;
+    bottom:-50px;
+    width:20px;
+    height:20px;
+    background:rgba(58,160,255,0.7);
+    border-radius:50%;
+    animation:bubbleUp linear infinite;
+}
+@keyframes bubbleUp{
+    0%{transform:translateY(0) scale(1); opacity:1;}
+    100%{transform:translateY(-120vh) scale(1.5); opacity:0;}
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+</style>
+</head>
+<body>
+
+<div id="loading">
+    <div class="spinner"></div>
+    جاري التحميل...
+</div>
+
+<!-- شاشة الباسورد -->
+<div id="lockScreen">
+    <h2>لراندا فقط 💙</h2>
+    <input type="password" id="pass" placeholder="ادخلي الباسورد">
+    <button onclick="checkPass()">دخول</button>
+    <p id="error" style="color:red;"></p>
+</div>
+
+<!-- المحتوى الرئيسي -->
+<div id="main">
+<h1>يا راندا 💙</h1>
+<p id="typing"></p>
+<div id="counter"></div>
+
+<!-- سلايدر الصور والفيديو -->
+<div class="slider">
+<img src="https://i.postimg.cc/RC2NMwdZ/IMG-20260219-WA0007.jpg" class="active">
+<img src="https://i.postimg.cc/Lsy8GPh1/file-0000000021a071f48b5031efd9ffd46d.png">
+<img src="https://i.postimg.cc/t4kqV63J/IMG-20250611-WA0008.jpg">
+<video src="https://od.lk/s/MzlfMTAxMDExMDU2Xw/VID-20260219-WA0008.mp4" muted loop></video>
+<img src="https://i.postimg.cc/TwzfXJ6B/Snapchat-1695438668.jpg">
+<img src="https://i.postimg.cc/Z5bZZqGF/IMG-20250612-WA0027.jpg">
+</div>
+
+<!-- زر النصايح -->
+<button onclick="showTip()">نصايح يومية محمودية 💡</button>
+
+<!-- الفورم -->
+<h3>اكتبيلي حاجة هنا:</h3>
+<form action="https://formspree.io/f/mgolljgj" method="POST">
+    <textarea name="message" rows="4" placeholder="مستني كلامك 💙" required></textarea><br>
+    <input type="hidden" name="name" value="Randa">
+    <button type="submit">إرسال 💙</button>
+</form>
+
+<audio id="song" loop>
+<source src="https://od.lk/s/MzlfMTAxMDExMDUyXw/Tamer%20Ashour%20-%207obk%20Rezk%20_%20%D8%AA%D8%A7%D9%85%D8%B1%20%D8%B9%D8%A7%D8%B4%D9%88%D8%B1%20-%20%D8%AD%D8%A8%D9%83%20%D8%B1%D8%B2%D9%82%28MP3_160K%29.mp3" type="audio/mpeg">
+</audio>
+</div>
+
+<script>
+// تحميل + ظهور شاشة الباسورد
+window.addEventListener('load',()=>{
+    setTimeout(()=>{
+        document.getElementById("loading").style.display="none";
+        let lock=document.getElementById("lockScreen");
+        lock.style.display="flex";
+        lock.style.opacity="1";
+    },1500);
+});
+
+// الباسورد
+function checkPass(){
+    if(document.getElementById("pass").value=="296211"){
+        document.getElementById("lockScreen").style.opacity="0";
+        setTimeout(()=>{
+            document.getElementById("lockScreen").style.display="none";
+            document.getElementById("main").style.display="block";
+            document.getElementById("song").play();
+            createBubbles(30); // فقاعات
+        },800);
+    }else{
+        document.getElementById("error").innerText="مش إنتي برضه 😏";
+    }
+}
+
+// كتابة الرسالة ببطء
+let text = `من يوم ما دخلتي حياتي وأنا بقيت أضحك لوحدي،
+وألعب دومينو كأني في بطولة عالم 😄
+
+إحنا شوية عيال صغيرين بنهزر،
+وشوية جد،
+وشوية رخامه بطعمنا إحنا 😜
+
+وكل مرة تكتبي على إيدي بالقلم،
+بحس إنها علامة ملكية رسمية 😂✍️
+
+يمكن نزعل شوية…
+بس الحقيقة الوحيدة:
+إني بحبك جدًا…
+وعايز أعيش وأهزر معاكي طول العمر 💙
+
+— محمود`;
+
+let i=0;
+function type(){
+    if(i<text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type,55);
+    }
+}
+type();
+
+// عداد الأيام
+let startDate = new Date("2025-06-10");
+function updateCounter(){
+    let now = new Date();
+    let diff = now - startDate;
+    let days = Math.floor(diff/(1000*60*60*24));
+    document.getElementById("counter").innerText = "بقالنا مع بعض: " + days + " يوم 💙";
+}
+setInterval(updateCounter,1000);
+updateCounter();
+
+// السلايدر
+let slides = document.querySelectorAll(".slider img, .slider video");
+let index = 0;
+setInterval(()=>{
+    slides.forEach(el=>el.classList.remove("active"));
+    index = (index+1)%slides.length;
+    slides[index].classList.add("active");
+    if(slides[index].tagName==="VIDEO"){
+        slides[index].currentTime=0;
+        slides[index].play();
+    }
+},7000);
+
+// النصايح المصرية
+const tips = [
+  "خلي ضحكتك طول اليوم… ضحكتك بتشفي قلبي 😄",
+  "لو زهقتي، افتكري آخر مرة رخمنا فيها 😂",
+  "امسحي القلم اللي على إيدي… دي ملكية رسمية ✍️",
+  "لو شفتِ حاجة مضحكة، ابعتيلي ضحكتك… ده بيخليني فرحان 💙",
+  "خلي الدومينو دايمًا معانا… ونلعب ونهرّج 😜",
+  "لو شفتِ نجمة في السما، اقوليلي… هخليها تنور عشانا ✨",
+  "لو زهقتي من اليوم، اقعدي جمبي… وهنضحك سوا 😎",
+  "خلي القهوة عليا… والضحك عليا بردو ☕😂",
+  "لو حسيتي بالبرد، حضني دافي… قلبي دافي أكتر 💙🔥",
+  "كل مرة تكتبي على إيدي، بحس إن الدنيا ملكنا 😂💓"
+];
+
+function showTip(){
+    const tip = tips[Math.floor(Math.random()*tips.length)];
+    alert("نصيحة اليوم 😎:\n\n" + tip);
+}
+
+// فقاعات
+function createBubbles(num){
+    for(let i=0;i<num;i++){
+        let bubble=document.createElement('div');
+        bubble.className='bubble';
+        bubble.style.left=Math.random()*100+'vw';
+        bubble.style.width=10+Math.random()*20+'px';
+        bubble.style.height=bubble.style.width;
+        bubble.style.animationDuration=3+Math.random()*5+'s';
+        document.getElementById("main").appendChild(bubble);
+    }
+}
+</script>
+</body>
+</html>
